@@ -1,0 +1,20 @@
+ ------
+ Maven 2 IDEA UI Designer Plugin
+ ------
+
+Maven 2 IDEA UI Designer Plugin
+
+  This plugin provides the capability to convert *.form files into Java code with the goal "ideauidesigner:javac2".
+
+  The plugin supports Intellij IDEA 5.1 Form generation code.
+
+  To learn how to use the plugin, click {{{howto.html}here}}.
+
+
+* Alternatives
+
+ Use the ant task provided by Intellij and the {{{http://maven.apache.org/plugins/maven-antrun-plugin/}maven-antrun-plugin}}.
+
+* Links
+
+  {{{http://www.intellij.org/twiki/bin/view/Main/IntelliJUIDesignerFAQ}How to use UI designer ANT task?}} 

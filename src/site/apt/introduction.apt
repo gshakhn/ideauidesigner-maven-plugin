@@ -6,7 +6,7 @@ Maven 2 IDEA UI Designer Plugin
 
   This plugin provides the capability to convert *.form files into Java code with the goal "ideauidesigner:javac2".
 
-  The plugin supports Intellij IDEA 5.1 Form generation code.
+  The plugin supports Intellij IDEA 6.0.3 Form generation code. If you need version 5.1, use version 1.0-alpha-1 of the plugin.
 
   To learn how to use the plugin, click {{{howto.html}here}}.
 

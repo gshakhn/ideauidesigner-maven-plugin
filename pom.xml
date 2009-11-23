@@ -2,15 +2,27 @@
   <parent>
     <artifactId>mojo-parent</artifactId>
     <groupId>org.codehaus.mojo</groupId>
-    <version>21</version>
+    <version>22</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ideauidesigner-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <version>1.0-beta-1-SNAPSHOT</version>
   <name>Maven IDEA UI Designer Plugin</name>
+  <description>A plugin that wraps around Intellij ant tasks to build your GUI forms into your builds (http://www.jetbrains.com/idea/features/gui_builder.html#link16)</description>
   <inceptionYear>2006</inceptionYear>
   <url>http://mojo.codehaus.org/ideauidesigner-maven-plugin</url>
+
+  <prerequisites>
+    <maven>2.0.4</maven>
+  </prerequisites>
+
+  <scm>
+    <connection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/ideauidesigner-maven-plugin</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/mojo/trunk/mojo/ideauidesigner-maven-plugin</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/mojo/trunk/mojo/ideauidesigner-maven-plugin</url>
+  </scm>
+
   <licenses>
     <license>
       <name>Apache License 2</name>

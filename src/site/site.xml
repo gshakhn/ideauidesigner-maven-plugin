@@ -1,22 +1,11 @@
 <project name="Maven IDEA UI Designer plugin">
-  <bannerLeft>
-    <name>Maven IDEA UI Designer plugin</name>
-    <src>http://maven.apache.org/images/apache-maven-project.png</src>
-    <href>http://maven.apache.org/</href>
-  </bannerLeft>
-  <bannerRight>
-    <src>http://maven.apache.org/images/maven-small.gif</src>
-  </bannerRight>
   <body>
-    <links>
-      <item name="Maven 2" href="http://maven.apache.org/maven2/"/>
-    </links>
-
-    <menu name="Maven IDEA UI Designer Quickstart">
-      <item name="Introduction" href="introduction.html"/>
-      <item name="How to use" href="howto.html"/>
-    </menu>
-    ${reports}
+    <menu name="Overview"> 
+      <item name="Introduction" href="index.html"/> 
+      <item name="Goals" href="plugin-info.html"/> 
+      <item name="Usage" href="usage.html"/> 
+      <item name="FAQ" href="faq.html"/> 
+    </menu> 
   </body>
 </project>
 

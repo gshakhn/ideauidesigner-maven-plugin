@@ -152,6 +152,9 @@ public class Javac2Mojo
             classpath.createPathElement().setLocation( artifact.getFile() );
         }
 
+        File rtJar = new File(System.getProperty("java.home") + "/lib", "rt.jar");
+        classpath.createPathElement().setLocation(rtJar);
+
         classpath.createPathElement().setLocation( destDirectory );
 
         getLog().debug( "created classpath:" + classpath );

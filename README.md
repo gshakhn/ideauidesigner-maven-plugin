@@ -3,11 +3,9 @@ Introduction
 
 This is a git clone of https://svn.codehaus.org/mojo/trunk/mojo/ideauidesigner-maven-plugin.
 
-I modified it to support IntelliJ 12.x since an [IntelliJ plugin] wasn't building with the official version.
+I modified it to support IntelliJ 12.x since one of my IntelliJ plugins wasn't building with 1.0-beta-1.
 
 All credit goes to original authors of the maven plugin.
-
-[IntelliJ plugin]: https://github.com/gshakhn/sonar-intellij-plugin
 
 Usage
 -----

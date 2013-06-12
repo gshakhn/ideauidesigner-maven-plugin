@@ -16,21 +16,20 @@ package org.codehaus.mojo.ideauidesigner;
  * limitations under the License.
  */
 
+import com.intellij.uiDesigner.ant.Javac2;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.artifact.Artifact;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.BuildListener;
 import org.apache.tools.ant.BuildEvent;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.BuildListener;
+import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.Path;
 
-import com.intellij.uiDesigner.ant.Javac2;
-
 import java.io.File;
-import java.util.Iterator;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Generates the Java sources from the *.form files.
@@ -46,8 +45,7 @@ import java.util.Collection;
  * @see <a href="http://www.intellij.org/twiki/bin/view/Main/IntelliJUIDesignerFAQ">ui designer Ant tasks documentation</a>.
  */
 public class Javac2Mojo
-    extends AbstractMojo
-{
+        extends AbstractMojo {
     // FIXME: it might be better to try to reuse the AbstractCompilerMojo ??
     // for now we limit the interface to the bare minimum
 
@@ -121,11 +119,10 @@ public class Javac2Mojo
     private boolean verbose;
 
     public void execute()
-        throws MojoExecutionException
-    {
+            throws MojoExecutionException {
 
-        if ( ! destDirectory.exists() && ! destDirectory.mkdirs() ) {
-           getLog().warn( "the destination directory doesn't exists and couldn't be created. The goal with probably fail." );
+        if (!destDirectory.exists() && !destDirectory.mkdirs()) {
+            getLog().warn("the destination directory doesn't exists and couldn't be created. The goal with probably fail.");
         }
 
         final Project antProject = new Project();
@@ -134,82 +131,86 @@ public class Javac2Mojo
 
         final Javac2 task = new Javac2();
 
-        task.setProject( antProject );
+        task.setProject(antProject);
 
-        task.setDestdir( destDirectory );
+        task.setDestdir(destDirectory);
 
-        task.setFailonerror( failOnError );
+        task.setFailonerror(failOnError);
 
-        final Path classpath = new Path( antProject );
+        final Path classpath = new Path(antProject);
 
-        final Collection artifacts = project.getArtifacts();
 
-        for (Iterator iterator = artifacts.iterator(); iterator.hasNext();) {
+        final Collection artifacts = project.getDependencyArtifacts();
+
+        for (Iterator iterator = artifacts.iterator(); iterator.hasNext(); ) {
             final Artifact artifact = (Artifact) iterator.next();
-            if ( ! "jar".equals( artifact.getType() ) )
-              continue;
 
-            classpath.createPathElement().setLocation( artifact.getFile() );
+            getLog().debug("candidate artifact to classpath:" + artifact);
+
+            if (!"jar".equals(artifact.getType()) || Artifact.SCOPE_TEST.equals( artifact.getScope() ) )
+                continue;
+
+            getLog().debug("collected artifact as classpath element:" + artifact);
+
+            classpath.createPathElement().setLocation(artifact.getFile());
         }
 
-        classpath.createPathElement().setLocation( destDirectory );
 
-        getLog().debug( "created classpath:" + classpath );
+        classpath.createPathElement().setLocation(destDirectory);
 
-        task.setClasspath( classpath );
+        getLog().debug("created classpath:" + classpath);
 
-        task.setFork( fork );
+        task.setClasspath(classpath);
+
+        task.setFork(fork);
 
         // task.setMemoryInitialSize();
 
         // task.setMemoryMaximumSize()
 
-        task.setDebug( debug );
+        task.setDebug(debug);
 
-        task.setVerbose( verbose );
+        task.setVerbose(verbose);
 
-        task.setSrcdir( new Path( antProject, sourceDirectory.getAbsolutePath() ) );
+        task.setSrcdir(new Path(antProject, sourceDirectory.getAbsolutePath()));
 
-        task.setIncludes( "**/*.form" );
+        task.setIncludes("**/*.form");
 
-        getLog().info( "Executing IDEA UI Designer task..." );
+        getLog().info("Executing IDEA UI Designer task...");
 
-        try
-        {
+        try {
             task.execute();
-        }
-        catch ( BuildException e )
-        {
-            throw new MojoExecutionException( "command execution failed", e );
+        } catch (BuildException e) {
+            throw new MojoExecutionException("command execution failed", e);
         }
     }
 
     private class DebugAntBuildListener implements BuildListener {
-        public void buildStarted( final BuildEvent buildEvent ) {
+        public void buildStarted(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
 
-        public void buildFinished( final BuildEvent buildEvent ) {
+        public void buildFinished(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
 
-        public void targetStarted( final BuildEvent buildEvent ) {
+        public void targetStarted(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
 
-        public void targetFinished( final BuildEvent buildEvent ) {
+        public void targetFinished(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
 
-        public void taskStarted( final BuildEvent buildEvent ) {
+        public void taskStarted(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
 
-        public void taskFinished( final BuildEvent buildEvent ) {
+        public void taskFinished(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
 
-        public void messageLogged( final BuildEvent buildEvent ) {
+        public void messageLogged(final BuildEvent buildEvent) {
             getLog().debug(buildEvent.getMessage());
         }
     }

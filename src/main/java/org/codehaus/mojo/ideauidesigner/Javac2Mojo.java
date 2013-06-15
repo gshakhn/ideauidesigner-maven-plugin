@@ -142,11 +142,11 @@ public class Javac2Mojo
 
         final Path classpath = new Path( antProject );
 
-        final Collection artifacts = project.getArtifacts();
+        final Collection artifacts = project.getDependencyArtifacts();
 
         for (Iterator iterator = artifacts.iterator(); iterator.hasNext();) {
             final Artifact artifact = (Artifact) iterator.next();
-            if ( ! "jar".equals( artifact.getType() ) )
+            if ( ! "jar".equals( artifact.getType() ) || Artifact.SCOPE_TEST.equals(artifact.getType()))
               continue;
 
             classpath.createPathElement().setLocation( artifact.getFile() );

@@ -146,7 +146,7 @@ public class Javac2Mojo
 
         for (Iterator iterator = artifacts.iterator(); iterator.hasNext();) {
             final Artifact artifact = (Artifact) iterator.next();
-            if ( ! "jar".equals( artifact.getType() ) || Artifact.SCOPE_TEST.equals(artifact.getType()))
+            if ( ! "jar".equals( artifact.getType() ) || Artifact.SCOPE_TEST.equals(artifact.getScope()))
               continue;
 
             classpath.createPathElement().setLocation( artifact.getFile() );
